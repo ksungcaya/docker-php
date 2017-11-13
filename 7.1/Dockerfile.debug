@@ -1,0 +1,14 @@
+FROM ubuntu:16.04
+
+MAINTAINER ksungcaya
+
+RUN apt-get update \
+    && apt-get install php7.1-xdebug \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY xdebug.ini /etc/php/7.1/mods-available/
+
+EXPOSE 9000
+
+CMD ["php-fpm7.1"]
