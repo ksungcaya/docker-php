@@ -23,6 +23,7 @@ The image contains the following pre-installed php extensions as per the version
 * PHP_VERSION-bcmath
 * PHP_VERSION-mongo
 * PHP_VERSION-intl
+* PHP_VERSION-soap
 * php-memcached
 * php-memcache
 * php-redis

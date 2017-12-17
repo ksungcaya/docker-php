@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER ksungcaya
+LABEL maintainer='ksungcaya'
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y curl zip unzip git software-properties-
     && apt-get install -y php7.1-fpm php7.1-cli \
        php7.1-mcrypt php7.1-gd php7.1-sqlite3 php7.1-mysql \
        php7.1-pgsql php7.1-imap php7.1-mbstring php7.1-xml php7.1-curl \
-       php7.1-bcmath php7.1-mongo php7.1-intl \
+       php7.1-bcmath php7.1-mongo php7.1-intl php7.1-soap \
        php-pear php-memcached php-memcache php-redis
 
 # Install apcu
