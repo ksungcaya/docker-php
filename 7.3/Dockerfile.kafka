@@ -1,0 +1,31 @@
+FROM php-app:7.3
+
+LABEL maintainer='ksungcaya'
+
+ENV LIBKAFKA_PATH='/tmp/librdkafka'
+
+RUN apt-get update \
+    && apt-get install -y software-properties-common build-essential \
+    && add-apt-repository -y ppa:ondrej/php \
+    && apt-get update \
+    && apt-get install -y php7.3-dev
+
+WORKDIR ${LIBKAFKA_PATH}
+
+RUN git clone https://github.com/edenhill/librdkafka.git . \
+    && ./configure \
+    && make \
+    && make install \
+    && pecl install rdkafka
+
+COPY kafka.ini /etc/php/7.3/mods-available/
+
+RUN phpenmod kafka \
+    && apt-get remove -y --purge software-properties-common build-essential \
+    && apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 80 443
+
+ENTRYPOINT ["docker-entrypoint"]
